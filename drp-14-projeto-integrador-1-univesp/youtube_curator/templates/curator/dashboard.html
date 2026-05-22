@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Treinamento{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="fw-bold mb-0">Olá, {{ user.get_full_name|default:user.username }}!</h2>
+    <p class="text-muted">Escolha um módulo e comece a aprender.</p>
+  </div>
+  <a href="{% url 'curator:search' %}" class="btn btn-primary">
+    <i class="bi bi-search me-1"></i> Buscar Vídeos
+  </a>
+</div>
+
+<div class="row g-4">
+  {% for stat in module_stats %}
+  <div class="col-md-4">
+    <div class="card module-card border-0 shadow-sm h-100">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
+            <i class="bi {{ stat.module.icon }} text-primary fs-4"></i>
+          </div>
+          <h5 class="card-title mb-0 fw-bold">{{ stat.module.name }}</h5>
+        </div>
+        <p class="card-text text-muted small">{{ stat.module.description }}</p>
+
+        {% if stat.total > 0 %}
+        <div class="mb-3">
+          <div class="d-flex justify-content-between small text-muted mb-1">
+            <span>Progresso</span>
+            <span>{{ stat.watched }}/{{ stat.total }}</span>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-success" role="progressbar"
+                 style="width: {% widthratio stat.watched stat.total 100 %}%"></div>
+          </div>
+        </div>
+        {% else %}
+        <p class="text-muted small fst-italic">Nenhum vídeo adicionado ainda.</p>
+        {% endif %}
+
+        <a href="{% url 'curator:module_detail' stat.module.slug %}"
+           class="btn btn-outline-primary btn-sm w-100">
+          <i class="bi bi-arrow-right-circle me-1"></i> Acessar módulo
+        </a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="col-12">
+    <div class="alert alert-warning">
+      Nenhum módulo encontrado. Execute <code>python manage.py seed_modules</code>.
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

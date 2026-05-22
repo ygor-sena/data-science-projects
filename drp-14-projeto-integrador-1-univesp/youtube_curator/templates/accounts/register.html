@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Criar Conta — Plataforma de Treinamento{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-sm-10 col-md-6 col-lg-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <div class="text-center mb-4">
+          <i class="bi bi-person-plus-fill text-primary" style="font-size: 3rem;"></i>
+          <h4 class="mt-2 fw-bold">Criar Conta</h4>
+          <p class="text-muted small">Preencha os dados abaixo para se cadastrar</p>
+        </div>
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger py-2">
+          {% for error in form.non_field_errors %}
+          <div><i class="bi bi-exclamation-triangle me-1"></i>{{ error }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="id_first_name" class="form-label fw-semibold">Nome</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" name="first_name" id="id_first_name"
+                     value="{{ form.first_name.value|default:'' }}"
+                     class="form-control {% if form.first_name.errors %}is-invalid{% endif %}"
+                     placeholder="Seu nome" autofocus required>
+              {% if form.first_name.errors %}
+              <div class="invalid-feedback">{{ form.first_name.errors.0 }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="id_last_name" class="form-label fw-semibold">Sobrenome <span class="text-muted fw-normal">(opcional)</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" name="last_name" id="id_last_name"
+                     value="{{ form.last_name.value|default:'' }}"
+                     class="form-control {% if form.last_name.errors %}is-invalid{% endif %}"
+                     placeholder="Seu sobrenome">
+              {% if form.last_name.errors %}
+              <div class="invalid-feedback">{{ form.last_name.errors.0 }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="id_username" class="form-label fw-semibold">Usuário</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-at"></i></span>
+              <input type="text" name="username" id="id_username"
+                     value="{{ form.username.value|default:'' }}"
+                     class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+                     placeholder="seu.usuario" required>
+              {% if form.username.errors %}
+              <div class="invalid-feedback">{{ form.username.errors.0 }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="id_password1" class="form-label fw-semibold">Senha</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock"></i></span>
+              <input type="password" name="password1" id="id_password1"
+                     class="form-control {% if form.password1.errors %}is-invalid{% endif %}"
+                     placeholder="Mínimo 8 caracteres" required>
+              {% if form.password1.errors %}
+              <div class="invalid-feedback">{{ form.password1.errors.0 }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="id_password2" class="form-label fw-semibold">Confirmar senha</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+              <input type="password" name="password2" id="id_password2"
+                     class="form-control {% if form.password2.errors %}is-invalid{% endif %}"
+                     placeholder="Repita a senha" required>
+              {% if form.password2.errors %}
+              <div class="invalid-feedback">{{ form.password2.errors.0 }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 fw-semibold mb-3">
+            <i class="bi bi-person-check me-1"></i> Criar conta
+          </button>
+        </form>
+
+        <div class="text-center">
+          <span class="text-muted small">Já tem uma conta?</span>
+          <a href="{% url 'accounts:login' %}" class="btn btn-outline-secondary w-100 mt-2 fw-semibold">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

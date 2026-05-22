@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Entrar — Plataforma de Treinamento{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-sm-10 col-md-6 col-lg-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <div class="text-center mb-4">
+          <i class="bi bi-play-circle-fill text-primary" style="font-size: 3rem;"></i>
+          <h4 class="mt-2 fw-bold">Plataforma de Treinamento</h4>
+          <p class="text-muted small">Entre com suas credenciais para acessar</p>
+        </div>
+
+        {% if form.errors %}
+        <div class="alert alert-danger py-2">
+          <i class="bi bi-exclamation-triangle me-1"></i>
+          Usuário ou senha incorretos. Tente novamente.
+        </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="id_username" class="form-label fw-semibold">Usuário</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" name="username" id="id_username"
+                     class="form-control" placeholder="seu.usuario" autofocus required>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="id_password" class="form-label fw-semibold">Senha</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock"></i></span>
+              <input type="password" name="password" id="id_password"
+                     class="form-control" placeholder="••••••••" required>
+            </div>
+          </div>
+          <input type="hidden" name="next" value="{{ next }}">
+          <button type="submit" class="btn btn-primary w-100 fw-semibold mb-3">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+          </button>
+        </form>
+
+        <div class="text-center">
+          <span class="text-muted small">Ainda não tem uma conta?</span>
+          <a href="{% url 'accounts:register' %}" class="btn btn-outline-secondary w-100 mt-2 fw-semibold">
+            <i class="bi bi-person-plus me-1"></i> Criar conta
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
