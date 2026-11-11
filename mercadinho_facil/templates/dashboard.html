@@ -1,0 +1,137 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mercadinho Fácil</title>
+<link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+
+<body>
+<header class="topbar">
+  <strong>🛒 Mercadinho Fácil</strong>
+  <span>{{ request.user.username }} · <a href="/logout/">Sair</a></span>
+</header>
+
+<div class="layout">
+  <nav class="sidebar" aria-label="Navegação principal">
+    <a href="#inicio">Início</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#estoque">Estoque</a>
+    <a href="#movimentacoes">Entradas/Saídas</a>
+    <a href="#validade">Validade</a>
+  </nav>
+
+  <main class="content">
+    <section id="inicio">
+      <h1>Dashboard</h1>
+      <div class="cards">
+        <article><span>Total de produtos</span><b id="totalProdutos">0</b></article>
+        <article><span>Estoque baixo</span><b id="estoqueBaixo">0</b></article>
+        <article><span>Sem estoque</span><b id="semEstoque">0</b></article>
+        <article><span>Vencidos</span><b id="vencidos">0</b></article>
+      </div>
+    </section>
+
+    <section id="produtos" class="panel">
+      <h2>Cadastro de produto</h2>
+      <form id="produtoForm">
+        <div class="grid">
+          <label>Nome
+            <input id="nome" required>
+          </label>
+
+          <label>Categoria
+            <input id="categoria" required placeholder="Ex.: Alimentos">
+          </label>
+
+          <label>Preço
+            <input id="preco" type="number" step="0.01" min="0" required>
+          </label>
+
+          <label>Quantidade inicial
+            <input id="quantidade" type="number" min="0" required>
+          </label>
+
+          <label>Estoque mínimo
+            <input id="minimo" type="number" min="0" required>
+          </label>
+
+          <label>Data de validade
+            <input id="validade" type="date">
+          </label>
+        </div>
+        <button type="submit">Cadastrar produto</button>
+      </form>
+    </section>
+
+    <section id="estoque" class="panel">
+      <h2>Consulta de estoque</h2>
+      <input id="busca" placeholder="Buscar produto..."
+             aria-label="Buscar produto">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Categoria</th>
+              <th>Estoque</th>
+              <th>Mínimo</th>
+              <th>Validade</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaProdutos"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="movimentacoes" class="panel">
+      <h2>Entrada / Saída</h2>
+
+      <form id="movForm">
+        <div class="grid">
+          <label>Produto
+            <select id="movProduto" required></select>
+          </label>
+
+          <label>Tipo
+            <select id="movTipo">
+              <option value="ENTRADA">Entrada</option>
+              <option value="SAIDA">Saída</option>
+            </select>
+          </label>
+
+          <label>Quantidade
+            <input id="movQuantidade" type="number" min="1" required>
+          </label>
+
+          <label>Observação
+            <input id="movObservacao" placeholder="Opcional">
+          </label>
+        </div>
+
+        <button type="submit">Registrar movimentação</button>
+      </form>
+
+      <p id="mensagem" class="success" role="status"></p>
+    </section>
+
+    <section id="validade" class="panel">
+      <h2>Controle de validade</h2>
+      <div id="listaValidade"></div>
+    </section>
+  </main>
+</div>
+
+<script src="{% static 'js/app.js' %}"></script>
+<!-- VLibras: recurso de acessibilidade em Libras -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+</body>
+</html>

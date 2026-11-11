@@ -1,0 +1,41 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fa;color:#17324d}
+.topbar{height:60px;background:#0b4f7c;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:0 24px}
+.topbar a{color:#fff}
+.layout{display:flex;min-height:calc(100vh - 60px)}
+.sidebar{width:210px;background:#083b5d;padding:20px}
+.sidebar a{display:block;color:#fff;text-decoration:none;padding:12px;border-radius:6px;margin-bottom:6px}
+.sidebar a:hover{background:#12689d}
+.content{flex:1;padding:28px;max-width:1200px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cards article,.panel{background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:20px}
+.cards span{display:block;color:#65798a}
+.cards b{font-size:28px;display:block;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid label{display:flex;flex-direction:column;gap:6px;font-weight:bold}
+.grid input,.grid select,#busca{padding:10px;border:1px solid #b8c6d1;border-radius:6px}
+button{background:#0878c9;color:#fff;border:0;padding:11px 18px;border-radius:6px;cursor:pointer;margin-top:16px}
+button:hover{opacity:.9}
+.table-wrap{overflow:auto;margin-top:16px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #e1e7ec;text-align:left}
+.success{color:#167b35}
+.error{color:#a11}
+.status-normal{color:#167b35;font-weight:bold}
+.status-baixo{color:#b26b00;font-weight:bold}
+.status-vencido{color:#b00020;font-weight:bold}
+.login-page{display:grid;place-items:center;min-height:100vh;background:#f4f7fa}
+.login-card{background:#fff;padding:32px;border-radius:12px;width:min(420px,90vw);box-shadow:0 4px 20px rgba(0,0,0,.12)}
+.login-card form{display:grid;gap:8px}
+.login-card input{padding:12px}
+.login-card button{margin-top:8px}
+@media(max-width:800px){
+  .sidebar{width:70px}
+  .sidebar a{font-size:0}
+  .content{padding:16px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+}
+
+/* Acessibilidade: foco visível para navegação por teclado */
+:focus-visible{outline:3px solid #ffbf00;outline-offset:2px}

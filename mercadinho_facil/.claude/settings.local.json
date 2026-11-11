@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(.venv\\\\Scripts\\\\python -m pytest -q 2>&1)",
+      "PowerShell($env:PYTHONPATH = \"C:\\\\Users\\\\atomi\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Users-atomi-Desktop-mercadinho-facil-quinzena5-vlibras\\\\3716475f-a882-4836-ab3a-cf379d59098a\\\\scratchpad\"; .venv\\\\Scripts\\\\python -m pytest tests/e2e/test_navegador.py -q -s -p diag_conn 2>&1 | Select-String -Pattern \"OTHER|THREADS|passed|Warning\")",
+      "PowerShell($env:PYTHONPATH = \"C:\\\\Users\\\\atomi\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--Users-atomi-Desktop-mercadinho-facil-quinzena5-vlibras\\\\3716475f-a882-4836-ab3a-cf379d59098a\\\\scratchpad\"; .venv\\\\Scripts\\\\python -m pytest tests/e2e/test_navegador.py -q -s -p diag_conn -x 2>&1 | Select-String -Pattern \"Error|error\" | Select-Object -First 15)"
+    ]
+  }
+}

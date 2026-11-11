@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mercadinho Fácil — Acesso</title>
+<link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body class="login-page">
+<main class="login-card">
+  <h1>🛒 Mercadinho Fácil</h1>
+  <p>Controle de estoque e validade</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="id_username">Usuário</label>
+    <input id="id_username" name="username" autocomplete="username" required>
+
+    <label for="id_password">Senha</label>
+    <input id="id_password" name="password" type="password"
+           autocomplete="current-password" required>
+
+    {% if form.errors %}
+      <p class="error" role="alert">Usuário ou senha inválidos.</p>
+    {% endif %}
+
+    <button type="submit">Entrar</button>
+  </form>
+</main>
+<!-- VLibras: recurso de acessibilidade em Libras -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+</body>
+</html>
